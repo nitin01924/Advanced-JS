@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: black;
+        color: limegreen;
+        font-family: monospace;
+        flex-direction: column;
+      }
+
+      .time {
+        font-size: 80px;
+        margin-bottom: 30px;
+      }
+
+      button {
+        font-size: 25px;
+        margin: 10px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: limegreen;
+        color: black;
+        font-weight: bold;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="time">00:00:00</div>
+    <div class="buttons">
+      <button class="start">Start</button>
+      <button class="stop">Stop</button>
+      <button class="reset">Reset</button>
+    </div>
+
+    <script>
+      let timeDisplay = document.querySelector(".time");
+      let startbtn = document.querySelector(".start");
+      let stopbtn = document.querySelector(".stop");
+      let resetbtn = document.querySelector(".reset");
+
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+      let timer = null;
+
+      startbtn.addEventListener("click", function () {
+        if (timer !== null) {
+          clearInterval(timer);
+        }
+
+        timer = setInterval(starttimer, 1000);
+      });
+      stopbtn.addEventListener("click", function () {
+        clearInterval(timer);
+      });
+      resetbtn.addEventListener("click", function () {
+        clearInterval(timer);
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        timeDisplay.textContent = "00:00:00";
+      });
+
+      function starttimer() {
+        seconds++;
+        if (seconds == 60) {
+          seconds = 0;
+          minutes++;
+          if (minutes == 60) {
+            minutes = 0;
+            hours++;
+          }
+        }
+        let h = String(hours).padStart(2, "0");
+        let m = String(minutes).padStart(2, "0");
+        let s = String(seconds).padStart(2, "0");
+
+        timeDisplay.textContent = `${h}:${m}:${s}`;
+      }
+    </script>
+  </body>
+</html>

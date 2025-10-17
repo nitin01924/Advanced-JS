@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        width: 400px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .input-area {
+        display: flex;
+        gap: 10px;
+      }
+      .input-area input {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .input-area button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      li.done {
+        text-decoration: line-through;
+        color: gray;
+      }
+      li button {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>My To-Do List</h1>
+      <div class="input-area">
+        <input type="text" placeholder="Enter a task" class="task-input" />
+        <button class="add-btn">Add</button>
+      </div>
+      <ul class="task-list">
+     
+      </ul>
+    </div>
+
+    <script>
+  let add = document.querySelector(".add-btn");
+  let taskInput = document.querySelector(".task-input");
+  let list = document.querySelector(".task-list");
+
+  add.addEventListener("click", function () {
+    if (taskInput.value.trim() === "") {
+      alert("Please enter a task!");
+      return;
+    }
+
+    const li = document.createElement("li");
+    const textnode = document.createTextNode(taskInput.value);
+
+    // ❌ delete button for list items(li)      
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "❌";
+    delBtn.addEventListener("click", function () {
+      li.remove();
+    });
+
+    // ✅ toggle done on click
+    li.addEventListener("click", function (e) {
+      // to avoid clicking on delete button
+      if (e.target.tagName !== "BUTTON") {
+        li.classList.toggle("done");
+      }
+    });
+
+    li.appendChild(textnode);
+    li.appendChild(delBtn);
+    list.appendChild(li);
+
+    taskInput.value = ""; // clear the input text in input area to make it more proffessional
+  });
+    </script>
+  </body>
+</html>

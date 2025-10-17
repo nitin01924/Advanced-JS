@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>countdown timer</title>
+    <style>
+      body {
+        color: white;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: monospace;
+        flex-direction: column;
+      }
+      .time {
+        font-size: 2.5rem;
+        color: limegreen;
+        border: 3px solid limegreen;
+        padding: 20px;
+        /* margin: 20px; */
+        border-radius: 10px;
+      }
+      button {
+        font-size: 25px;
+        margin: 10px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: limegreen;
+        color: black;
+        font-weight: bold;
+      }
+      button:hover {
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="time">00:00:00</div>
+    <div>
+      <button class="settime">Set</button>
+      <button class="start">start</button>
+      <button class="pause">pause</button>
+    </div>
+  </body>
+  <script>
+    let timeDisplay = document.querySelector(".time");
+    let set = document.querySelector(".settime");
+    let start = document.querySelector(".start");
+    let pause = document.querySelector(".pause");
+
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    let timer = null;
+
+    // set.addEventListener("click", function(){
+    //   timeDisplay.textContent = prompt("Enter the time in HH:MM:SS ->");
+    // });
+    set.addEventListener("click", function () {
+      let input = prompt("Enter the time in HH:MM:SS ->");
+      let parts = input.split(":");
+      hours = parseInt(parts[0]);
+      minutes = parseInt(parts[1]);
+      seconds = parseInt(parts[2]);
+
+      let h = String(hours).padStart(2, "0");
+      let m = String(minutes).padStart(2, "0");
+      let s = String(seconds).padStart(2, "0");
+
+      timeDisplay.textContent = `${h}:${m}:${s}`;
+    });
+
+    pause.addEventListener("click", function () {
+      clearInterval(timer);
+    });
+
+    start.addEventListener("click", function () {
+      if (timer !== null) 
+      clearInterval(timer);
+      timer = setInterval(reducetimer, 1000);
+    });
+
+    // function reducetimer(){
+    //   seconds --;
+    //   if(seconds == 0){
+    //     minutes --;
+    //     if(minutes == 0){
+    //       hours--;
+    //     }
+    //   }
+    //   let h = String(hours).padStart(2, "0");
+    //   let m = String(minutes).padStart(2, "0");
+    //   let s = String(seconds).padStart(2, "0");
+
+    //   timeDisplay.textContent = `${h}:${m}:${s}`;
+    // }
+    function reducetimer() {
+      if (hours == 0 && minutes == 0 && seconds == 0) {
+        clearInterval(timer);
+        alert("Time's up!");
+        return;
+      }
+
+      if (seconds > 0) {
+        seconds--;
+      } else {
+        seconds = 59;
+        if (minutes > 0) {
+          minutes--;
+        } else {
+          minutes = 59;
+          if (hours > 0) {
+            hours--;
+          }
+        }
+      }
+
+      let h = String(hours).padStart(2, "0");
+      let m = String(minutes).padStart(2, "0");
+      let s = String(seconds).padStart(2, "0");
+
+      timeDisplay.textContent = `${h}:${m}:${s}`;
+    }
+  </script>
+</html>

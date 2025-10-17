@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>word counter</title>
+    <style>
+        body{
+            color: white;
+            background-color: black;
+        }
+        .main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .input-text{
+            width: 40%;
+            height: 10em;
+            color: white;
+            background-color: black;
+            margin-bottom: 15px;
+            border-radius: 20px;
+        }
+        button{
+            width: 20%;
+            height: 2em;
+            color: whitesmoke;
+            background-color: rgb(12, 12, 12);
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="text" class="input-text">
+        <button class="btn">Count</button>
+        <p class="output"></p>
+
+    </div>
+</body>
+<script>
+    let btn = document.querySelector(".btn");
+    let text = document.querySelector(".input-text");
+
+    let output = document.querySelector(".output");
+btn.addEventListener("click", function(){
+    let words = text.value.trim().split(/\s+/);
+    output.textContent = `Words: ${words.length}`;
+});
+
+</script>
+</html>

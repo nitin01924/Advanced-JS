@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count</title>
+    <style>
+        .main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .increase button{
+            display: inline;
+            font-size: 100px;
+            border-radius: 15px;
+        }.decrease button{
+            font-size: 100px;
+            border-radius: 15px;
+            width: 75px;
+        }
+        .reset button{
+            font-size: 100px;
+            border-radius: 15px;
+            width: 75px;
+        }
+        h1{
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main"><h1 class="counting">0</h1>
+    <div class="increase"><button >+</button></div>
+    <div class="decrease"><button >-</button></div>
+    <div class="reset"><button>reset</button></div>
+</div>
+<script>
+    let counting = document.querySelector(".counting");
+    let count = 0;
+    let increase = document.querySelector(".increase button");
+    increase.addEventListener('click', function(){
+        count++;
+         counting.innerText = count;
+    });
+    let decrease = document.querySelector(".decrease button");
+    decrease.addEventListener('click', function(){
+        count--;
+         counting.innerText = count;
+    });
+     let reset = document.querySelector(".reset button");
+    reset.addEventListener('click', function(){
+      count = 0;
+      counting.innerText = count;
+    });
+</script>
+</body>
+
+</html>
